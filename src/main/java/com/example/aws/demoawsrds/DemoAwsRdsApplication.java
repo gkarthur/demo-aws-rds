@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class DemoAwsRdsApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(DemoAwsRdsApplication.class, args);
-	}
+	public static void main(String[] args) throws Exception {
+        new SpringApplication(DemoAwsRdsApplication.class).run(args);
+    }
 }
