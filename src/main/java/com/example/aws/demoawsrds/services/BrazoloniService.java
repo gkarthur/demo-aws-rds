@@ -14,9 +14,9 @@ public class BrazoloniService {
 	
 	//Initialize Data
 	static {
-		brazolonis.add(new Brazoloni(100L, "brazoloni01"));
-		brazolonis.add(new Brazoloni(102L, "brazoloni02"));
-		brazolonis.add(new Brazoloni(103L, "brazoloni03"));
+		brazolonis.add(new Brazoloni(101L, "brazoloni101"));
+		brazolonis.add(new Brazoloni(102L, "brazoloni102"));
+		brazolonis.add(new Brazoloni(103L, "brazoloni103"));
 	}
 	
 	public List<Brazoloni> getAll() {
@@ -24,6 +24,6 @@ public class BrazoloniService {
 	}
 	
 	public Brazoloni getById(long id) {
-		return new Brazoloni(id, "brazoloni01");
+		return new Brazoloni(id, new StringBuffer("brazoloni").append(id).toString());
 	}
 }
