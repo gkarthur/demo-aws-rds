@@ -5,7 +5,7 @@ web application to demonstrate aws rds service
 mvn clean install
 
 ## run application
-mvn run
+java -jar target/demo-aws-rds
 
 ## test application via browser
 
