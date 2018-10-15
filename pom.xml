@@ -6,7 +6,9 @@
 	<groupId>com.example.aws</groupId>
 	<artifactId>demo-aws-rds</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<!-- <packaging>jar</packaging>  -->
+	
+	<packaging>war</packaging>
 
 	<name>demo-aws-rds</name>
 	<description>Demo project for AWS RDS service</description>
@@ -28,7 +30,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>			
+			<exclusions>
+			    <!-- exclusion for war mode (don't need tomcat server embeded)-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 
 		<dependency>
@@ -42,6 +51,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- for war mode -->
+		<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
 		<!-- 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -84,4 +101,46 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+        	<id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>default</name>
+                    <value>!disabled</value>
+                </property>
+            </activation>
+        </profile>
+        
+        <profile>
+        	<id>profile-jar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>default</name>
+                    <value>!disabled</value>
+                </property>
+            </activation>
+		    <build>
+		        <finalName>${project.artifactId}</finalName>
+		        <plugins>
+		            <plugin>
+		                <groupId>org.springframework.boot</groupId>
+		                <artifactId>spring-boot-maven-plugin</artifactId>
+		                <configuration>
+		                    <mainClass>com.example.aws.demoawsrds.DemoAwsRdsApplication</mainClass>
+		                </configuration>
+		                <executions>
+		                    <execution>
+		                        <goals>
+		                            <goal>repackage</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
+		            </plugin>            
+		        </plugins>
+		    </build>
+		 </profile>
+     </profiles>
 </project>
